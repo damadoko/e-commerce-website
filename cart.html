@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font-awesome CDN -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Shoes Trader | Your Card</title>
+  </head>
+  <body>
+    <nav id="home-navbar" class="navbar navbar-expand-sm navbar-light">
+      <a class="nav-brand" href="index.html">
+        <img class="shoes-icon" src="images/shoe.png" alt="Icon" />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navCollapse"
+        aria-controls="navCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-center" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" href="form.html">Sell</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-item text-center">
+        <a class="nav-link shopping-cart" href="#">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="badge">1</span>
+        </a>
+      </div>
+    </nav>
+
+    <div id="cart-modal">
+      <div class="cart-modal-item p-2 d-flex">
+        <img src="images/product/ultra_boost_5.0.jpg" alt="ultra_boost_5" />
+        <div class="cart-modal-item-info">
+          <p class="font-weight-bold m-0">
+            [Adidas] Ultra Boots 5.0
+          </p>
+          <small>Quantity: 2</small>
+          <small>148$</small>
+        </div>
+      </div>
+      <div class="cart-modal-item p-2 d-flex">
+        <img src="images/product/ultra_boost_5.0.jpg" alt="ultra_boost_5" />
+        <div class="cart-modal-item-info">
+          <p class="font-weight-bold m-0">
+            [Adidas] Ultra Boots 5.0
+          </p>
+          <small>Quantity: 2</small>
+          <small>148$</small>
+        </div>
+      </div>
+      <div id="cart-modal-total" class="py-4">
+        <a href="cart.html" id="cart-modal-total-view" class="btn">VIEW CART</a>
+        <a href="cart.html" id="cart-modal-total-checkout" class="btn"
+          >CHECK OUT</a
+        >
+      </div>
+    </div>
+
+    <div id="cart-page">
+      <h1 class="text-center py-4 text-uppercase">
+        Your cart
+      </h1>
+      <div class="title-break mb-4"></div>
+      <div class="cart-page-item-header">
+        <div class="cart-page-item-header-title">Items</div>
+        <div class="cart-page-item-header-unit-price">Unit Price</div>
+        <div class="cart-page-item-header-quantity">Quantity</div>
+        <div class="cart-page-item-header-total">Total</div>
+        <div class="cart-page-item-header-action">Delete</div>
+      </div>
+      <div class="cart-page-item-wrapper">
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-page-item px-4">
+          <div class="cart-page-item-title">Ultra boost 5.0</div>
+          <div class="cart-page-item-unit-price">100$</div>
+          <div class="cart-page-item-quantity">1</div>
+          <div class="cart-page-item-total">100%</div>
+          <div class="cart-page-item-action"><i class="fas fa-times"></i></div>
+        </div>
+      </div>
+      <div class="cart-page-total">
+        <p class="font-weight-bold">Total cost (14 items): 1400$</p>
+        <button class="btn btn-dark">Check Out</button>
+      </div>
+    </div>
+
+    <footer id="home-footer" class="d-flex justify-content-center py-4">
+      Copyright&copy; 2020 by Triet. All Right Reserved.
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
