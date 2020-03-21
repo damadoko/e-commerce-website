@@ -23,6 +23,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 .text-muted {
   text-decoration: line-through;
 }
@@ -80,6 +84,14 @@ a {
   background-color: var(--primary-color);
 }
 
+#home-navbar .nav-brand {
+  transition: all 0.5s ease-in-out;
+}
+
+#home-navbar .nav-brand:hover {
+  transform: rotate3d(0.5, 0.5, 1, 360deg);
+}
+
 #home-navbar .nav-link {
   position: relative;
   color: var(--text-color);
@@ -103,6 +115,41 @@ a {
 
 #home-carousel .carousel-inner .carousel-item img {
   height: 100vh;
+}
+
+#home-contact .col-md-4 {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#home-contact .col-md-4:hover {
+  color: var(--secondary-color);
+}
+
+#home-contact i {
+  margin-bottom: 2rem;
+}
+
+#home-about {
+  background: url("images/footer-bg.jpg") center center/cover;
+}
+
+#home-about li {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#home-about li:hover {
+  color: var(--secondary-color);
+}
+
+#home-about .fab {
+  color: var(--text-color);
+  transition: all 0.5s ease-in-out;
+}
+
+#home-about .fab:hover {
+  color: var(--primary-color);
 }
 
 #home-footer {
@@ -236,15 +283,19 @@ a {
   width: 20%;
 }
 
-#name {
+#form-name {
   width: 80%;
 }
 
-#file {
+#form-file {
   width: 80%;
 }
 
-#item-description {
+#form-discount {
+  width: 100%;
+}
+
+#form-item-description {
   width: 100%;
   padding: 1rem;
 }
@@ -261,7 +312,7 @@ a {
   transition: all 0.5s ease-in-out;
 }
 
-.show {
+.showModal {
   opacity: 1 !important;
   top: 66px !important;
   z-index: 99 !important;
@@ -388,7 +439,17 @@ a {
 
 #cart-page .cart-page-total {
   color: #ff3d00;
-  margin: auto;
+  margin: 1rem auto;
   width: 300px;
   text-align: center;
+}
+
+@media only screen and (max-width: 769px) {
+  #home-about ul {
+    border-bottom: 1px solid var(--primary-color);
+  }
+
+  #home-about ul:last-child {
+    border: none;
+  }
 }

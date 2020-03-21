@@ -67,25 +67,17 @@
     </nav>
 
     <div id="cart-modal">
-      <div class="cart-modal-item p-2 d-flex">
-        <img src="images/product/ultra_boost_5.0.jpg" alt="ultra_boost_5" />
-        <div class="cart-modal-item-info">
-          <p class="font-weight-bold m-0">
-            [Adidas] Ultra Boots 5.0
-          </p>
-          <small>Quantity: 2</small>
-          <small>148$</small>
-        </div>
-      </div>
-      <div class="cart-modal-item p-2 d-flex">
-        <img src="images/product/ultra_boost_5.0.jpg" alt="ultra_boost_5" />
-        <div class="cart-modal-item-info">
-          <p class="font-weight-bold m-0">
-            [Adidas] Ultra Boots 5.0
-          </p>
-          <small>Quantity: 2</small>
-          <small>148$</small>
-        </div>
+      <div id="cart-modal-wrapper">
+        <!-- <div class="cart-modal-item p-2 d-flex">
+       <img src="images/product/ultra_boost_5.0.jpg" alt="ultra_boost_5" />
+       <div class="cart-modal-item-info">
+         <p class="font-weight-bold m-0">
+           [Adidas] Ultra Boots 5.0
+         </p>
+         <small>Quantity: 2</small>
+         <small>148$</small>
+       </div>
+     </div> -->
       </div>
       <div id="cart-modal-total" class="py-4">
         <a href="cart.html" id="cart-modal-total-view" class="btn">VIEW CART</a>
@@ -103,49 +95,64 @@
       <form class="form-row w-60 m-auto">
         <div class="col-xl-6 mb-4 d-flex justify-content-between">
           <label>Shoes's Name:</label>
-          <input type="text" id="name" placeholder="[Adidas] Ultra boost 5.0" />
+          <input
+            type="text"
+            id="form-name"
+            placeholder="Ex: [Adidas] Ultra boost 5.0"
+          />
         </div>
         <div class="col-xl-6 mb-4 d-flex justify-content-between">
           <label>Upload Images:</label>
-          <input
-            type="file"
-            id="file"
-            class="form-control-file"
-            placeholder="[Adidas] Ultra boost 5.0"
-          />
+          <input type="file" id="form-file" class="form-control-file" />
+          <div style="max-width: 120px; opacity: 0;">
+            <img style="width: 100%;" id="img-view" src="" alt="img-view" />
+          </div>
         </div>
         <div class="col-md-6 mb-4">
           <label>Price:</label>
-          <input type="text" id="price" placeholder="input shoes price" />
+          <input type="text" id="form-price" placeholder="Ex: 100" />
         </div>
         <div class="col-md-6 mb-4">
           <label>Unit:</label>
-          <select id="unit-select">
+          <select id="form-unit-select">
             <option value="0">VND</option>
             <option value="1">Dollar</option>
           </select>
         </div>
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
           <label>Size:</label>
-          <input type="number" id="size" min="36" max="42" />
+          <input type="text" id="form-size" placeholder="Ex: 36,37,42" />
         </div>
-        <div class="col-md-6 mb-4">
-          <label>Unit:</label>
-          <select id="unit-select">
-            <option value="0">VND</option>
-            <option value="1">Dollar</option>
-          </select>
+        <div class="col-md-4 mb-4">
+          <label>Color:</label>
+          <input
+            type="text"
+            id="form-color-select"
+            placeholder="Ex: Red, Blue, All White"
+          />
+        </div>
+        <div class="col-md-4 mb-4">
+          <label>Discount:</label>
+          <input
+            id="form-discount"
+            type="number"
+            min="0"
+            max="99"
+            placeholder="form 0 to 99% discount"
+          />
         </div>
         <div class="col-md-12 mb-4">
           <textarea
-            id="item-description"
+            id="form-item-description"
             cols="30"
             rows="2"
-            placeholder="Description"
+            placeholder="Product description"
           ></textarea>
         </div>
         <div class="col-md-12 mb-2 justify-content-center">
-          <button class="btn btn-dark d-block mx-auto">Submit Item</button>
+          <button id="form-submit" class="btn btn-dark d-block mx-auto">
+            Submit Item
+          </button>
         </div>
       </form>
     </div>
