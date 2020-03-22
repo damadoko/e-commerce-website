@@ -414,6 +414,17 @@ const appCtrl = ((mod, UI) => {
       : null;
   };
 
+  const addEventListenerToRenderElement = () => {
+    const DOM = UI.DOMstring;
+    // Add AddToCart event (home-page)
+    const addToCartBtnNodeList = document.querySelectorAll(DOM.addCartBtn);
+    addToCartBtnNodeList !== null
+      ? Array.prototype.map.call(addToCartBtnNodeList, item =>
+          item.addEventListener("click", addItemToCartCtrl)
+        )
+      : null;
+  };
+
   const encodeURLCtrl = e => {
     const fileSelected = e.target.files;
     async function Main() {
@@ -454,7 +465,7 @@ const appCtrl = ((mod, UI) => {
     // Render stored Item
     UI.renderStoredItem();
     // Re-addEventListener to all button
-    addEventListenerCtrl();
+    addEventListenerToRenderElement();
   };
 
   return {
