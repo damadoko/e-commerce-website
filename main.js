@@ -165,53 +165,29 @@ const model = (() => {
       quantity: 1,
       webItemID: parseInt(itemInfo.webItemID)
     };
-    // Get current webItemID
-    const webItemIDInCartArr = data.itemInWeb.map(item => item.webItemID);
-    // Compare addItemID with all webItemID
-    const compareIDArr = webItemIDInCartArr.map(
-      id => id === parseInt(itemInfo.webItemID)
+    // Get current webItemID and Compare addItemID with all webItemID
+    const compareIDArr = data.itemInCart.map(
+      item =>
+        item.webItemID === newCartItem.webItemID &&
+        item.size === newCartItem.size &&
+        item.color === newCartItem.color
     );
+
     const compareID = compareIDArr.find(res => res === true);
     console.log(compareID);
     // find duplicate item index
     index = compareIDArr.indexOf(true); // -1 if no duplicate
     console.log(index);
     // Insert HTML if item not added to cart before ESLE increase quantity
-    compareID
+    compareID > 0
       ? (data.itemInCart[index].quantity += 1)
       : data.itemInCart.push(newCartItem);
     // Store item in localstorage
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   };
 
-  const formartNumber = number => {
-    // 1234.5678 -> 1,234.56
-    // 1234 -> 1,234.00
-
-    let num = number.toFixed(2);
-    let [intenger, decimal] = num.split(".");
-    if (intenger.length > 3 && intenger.length <= 6) {
-      intenger =
-        intenger.substr(0, intenger.length - 3) +
-        "," +
-        intenger.substr(intenger.length - 3, 3);
-    } else if (intenger.length > 6) {
-      intenger =
-        intenger.substr(0, intenger.length - 6) +
-        "," +
-        intenger.substr(intenger.length - 6, 3) +
-        "," +
-        intenger.substr(intenger.length - 3, 3);
-    } else {
-      intenger;
-    }
-
-    return `${intenger}.${decimal}`;
-  };
-
   return {
     addNewItemToModel: addNewItemToModel,
-    formartNumber: formartNumber,
     addNewCartItemToModel: addNewCartItemToModel
   };
 })();
@@ -233,9 +209,12 @@ const UICtrl = (() => {
     formSubmit: "#form-submit",
     itemWrapper: "#home-item-wrapper",
     itemCartWrapper: ".cart-page-item-wrapper",
+    cartPageTotal: ".cart-page-total",
+    cartPageItemTotal: ".cart-page-item-total",
     imgBase64: "#img-view",
     badge: ".badge",
-    addCartBtn: ".add-cart-btn"
+    addCartBtn: ".add-cart-btn",
+    delCartBtn: ".cart-page-item-action"
   };
 
   const getInputItem = () => {
@@ -323,7 +302,7 @@ const UICtrl = (() => {
           .join("")))
       : null;
 
-    // Insert HTML Blocls to the DOM
+    // Insert HTML Blocks to the DOM
     const product = document.querySelector(DOMstring.itemWrapper);
     const modal = document.querySelector(DOMstring.cartModalWraper);
     const cart = document.querySelector(DOMstring.itemCartWrapper);
@@ -332,7 +311,32 @@ const UICtrl = (() => {
     modal !== null ? (modal.innerHTML = itemHtmlModalBlock) : null;
     cart !== null ? (cart.innerHTML = itemHtmlCartBlock) : null;
     // Render cart modal quantity
-    document.querySelector(DOMstring.badge).innerHTML = local.itemInCart.length;
+    const itemQuantityInCart = local.itemInCart
+      .map(item => item.quantity)
+      .reduce((prev, next) => prev + next);
+    document.querySelector(DOMstring.badge).innerHTML = itemQuantityInCart;
+
+    // Render total in cart-page
+    const totalCart = document.querySelector(DOMstring.cartPageTotal);
+    if (totalCart !== null) {
+      const totalPayArr = document.querySelectorAll(
+        DOMstring.cartPageItemTotal
+      );
+      const totalPay = Array.prototype.map
+        .call(totalPayArr, item =>
+          parseInt(
+            item.innerHTML
+              .slice(0, -1)
+              .split(",")
+              .join("")
+          )
+        )
+        .reduce((prev, next) => prev + next);
+
+      totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
+        totalPay
+      )}đ`;
+    }
   };
 
   const processItemHtml = item => {
@@ -367,10 +371,10 @@ const UICtrl = (() => {
   const processItemHtmlCart = item => {
     let html, total, unit;
     item.unit ? (unit = "$") : (unit = "đ");
-    total = model.formartNumber(
+    total = appCtrl.formartNumber(
       parseInt(item.formatedDealtPrice.split(",").join("")) * item.quantity
     );
-    html = `<div class="cart-page-item px-4"><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><div class="cart-page-item-quantity">${item.quantity}</div><div class="cart-page-item-total">${total}${unit}</div><div class="cart-page-item-action"><i class="fas fa-trash-alt"></i></div></div>`;
+    html = `<div class="cart-page-item px-4"><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><div class="cart-page-item-quantity">${item.quantity}</div><div class="cart-page-item-total">${total}${unit}</div><div class="d-block m-auto"><i class="fas fa-trash-alt cart-page-item-action"></i></div></div>`;
     return html;
   };
   return {
@@ -406,10 +410,13 @@ const appCtrl = ((mod, UI) => {
       : null;
 
     // Add AddToCart event (home-page)
-    const addToCartBtnNodeList = document.querySelectorAll(DOM.addCartBtn);
-    addToCartBtnNodeList !== null
-      ? Array.prototype.map.call(addToCartBtnNodeList, item =>
-          item.addEventListener("click", addItemToCartCtrl)
+    addEventListenerToRenderElement();
+
+    // Add delete item (cart-page)
+    const deleteItemInCartBtn = document.querySelectorAll(DOM.delCartBtn);
+    deleteItemInCartBtn !== null
+      ? Array.prototype.map.call(deleteItemInCartBtn, item =>
+          item.addEventListener("click", deleteItemInCartCtrl)
         )
       : null;
   };
@@ -468,12 +475,42 @@ const appCtrl = ((mod, UI) => {
     addEventListenerToRenderElement();
   };
 
+  const deleteItemInCartCtrl = e => {
+    console.log("Clicked");
+  };
+
+  const formartNumber = number => {
+    // 1234.5678 -> 1,234.56
+    // 1234 -> 1,234.00
+
+    let num = number.toFixed(2);
+    let [intenger, decimal] = num.split(".");
+    if (intenger.length > 3 && intenger.length <= 6) {
+      intenger =
+        intenger.substr(0, intenger.length - 3) +
+        "," +
+        intenger.substr(intenger.length - 3, 3);
+    } else if (intenger.length > 6) {
+      intenger =
+        intenger.substr(0, intenger.length - 6) +
+        "," +
+        intenger.substr(intenger.length - 6, 3) +
+        "," +
+        intenger.substr(intenger.length - 3, 3);
+    } else {
+      intenger;
+    }
+
+    return `${intenger}.${decimal}`;
+  };
+
   return {
     init: () => {
       console.log("App started!");
       UI.renderStoredItem();
       addEventListenerCtrl();
-    }
+    },
+    formartNumber: formartNumber
   };
 })(model, UICtrl);
 
