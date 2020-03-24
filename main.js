@@ -151,7 +151,7 @@ const model = (() => {
     let newCartItem, newID, index;
     // Get local stored info
     data.itemInCart.length > 0
-      ? (newID = data.itemInCart[data.itemInCart.length - 1].ID)
+      ? (newID = data.itemInCart[data.itemInCart.length - 1].ID + 1)
       : (newID = 0);
 
     newCartItem = {
@@ -174,10 +174,8 @@ const model = (() => {
     );
 
     const compareID = compareIDArr.find(res => res === true);
-    console.log(compareID);
     // find duplicate item index
     index = compareIDArr.indexOf(true); // -1 if no duplicate
-    console.log(index);
     // Insert HTML if item not added to cart before ESLE increase quantity
     compareID > 0
       ? (data.itemInCart[index].quantity += 1)
@@ -186,9 +184,18 @@ const model = (() => {
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   };
 
+  const delCartItemInModel = itemID => {
+    const delIndex = data.itemInCart.map(item => item.ID).indexOf(itemID);
+    data.itemInCart.splice(delIndex, 1);
+    // Store data in localstorage
+    localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
+  };
+
   return {
     addNewItemToModel: addNewItemToModel,
-    addNewCartItemToModel: addNewCartItemToModel
+    addNewCartItemToModel: addNewCartItemToModel,
+    delCartItemInModel: delCartItemInModel,
+    data: data
   };
 })();
 
@@ -250,7 +257,6 @@ const UICtrl = (() => {
     );
     elementUnit === "$" ? (elementUnit = 1) : (elementUnit = 0);
     const webItemID = element.dataset.id;
-    console.log(elementUnit);
     return {
       title: elementTitle,
       formatedDealtPrice: formatedDealtPrice,
@@ -288,6 +294,7 @@ const UICtrl = (() => {
     // Bluid HTML block for each page
     let itemHtmlModalBlock = "";
     let itemHtmlCartBlock = "";
+    let itemQuantityInCart = 0;
 
     const itemHtmlBlock = local.itemInWeb
       .map(item => processItemHtml(item))
@@ -311,27 +318,36 @@ const UICtrl = (() => {
     modal !== null ? (modal.innerHTML = itemHtmlModalBlock) : null;
     cart !== null ? (cart.innerHTML = itemHtmlCartBlock) : null;
     // Render cart modal quantity
-    const itemQuantityInCart = local.itemInCart
-      .map(item => item.quantity)
-      .reduce((prev, next) => prev + next);
-    document.querySelector(DOMstring.badge).innerHTML = itemQuantityInCart;
+
+    const itemInCart = local.itemInCart;
+    itemInCart.length !== 0
+      ? ((itemQuantityInCart = itemInCart
+          .map(item => item.quantity)
+          .reduce((prev, next) => prev + next)),
+        (document.querySelector(
+          DOMstring.badge
+        ).innerHTML = itemQuantityInCart))
+      : null;
 
     // Render total in cart-page
     const totalCart = document.querySelector(DOMstring.cartPageTotal);
     if (totalCart !== null) {
+      let totalPay;
       const totalPayArr = document.querySelectorAll(
         DOMstring.cartPageItemTotal
       );
-      const totalPay = Array.prototype.map
-        .call(totalPayArr, item =>
-          parseInt(
-            item.innerHTML
-              .slice(0, -1)
-              .split(",")
-              .join("")
-          )
-        )
-        .reduce((prev, next) => prev + next);
+      itemInCart.length !== 0
+        ? (totalPay = Array.prototype.map
+            .call(totalPayArr, item =>
+              parseInt(
+                item.innerHTML
+                  .slice(0, -1)
+                  .split(",")
+                  .join("")
+              )
+            )
+            .reduce((prev, next) => prev + next))
+        : (totalPay = 0);
 
       totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
         totalPay
@@ -374,7 +390,7 @@ const UICtrl = (() => {
     total = appCtrl.formartNumber(
       parseInt(item.formatedDealtPrice.split(",").join("")) * item.quantity
     );
-    html = `<div class="cart-page-item px-4"><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><div class="cart-page-item-quantity">${item.quantity}</div><div class="cart-page-item-total">${total}${unit}</div><div class="d-block m-auto"><i class="fas fa-trash-alt cart-page-item-action"></i></div></div>`;
+    html = `<div class="cart-page-item px-4" data-id=${item.ID}><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><div class="cart-page-item-quantity">${item.quantity}</div><div class="cart-page-item-total">${total}${unit}</div><div class="d-block m-auto"><i class="fas fa-trash-alt cart-page-item-action"></i></div></div>`;
     return html;
   };
   return {
@@ -411,14 +427,6 @@ const appCtrl = ((mod, UI) => {
 
     // Add AddToCart event (home-page)
     addEventListenerToRenderElement();
-
-    // Add delete item (cart-page)
-    const deleteItemInCartBtn = document.querySelectorAll(DOM.delCartBtn);
-    deleteItemInCartBtn !== null
-      ? Array.prototype.map.call(deleteItemInCartBtn, item =>
-          item.addEventListener("click", deleteItemInCartCtrl)
-        )
-      : null;
   };
 
   const addEventListenerToRenderElement = () => {
@@ -428,6 +436,13 @@ const appCtrl = ((mod, UI) => {
     addToCartBtnNodeList !== null
       ? Array.prototype.map.call(addToCartBtnNodeList, item =>
           item.addEventListener("click", addItemToCartCtrl)
+        )
+      : null;
+    // Add delete item (cart-page)
+    const deleteItemInCartBtn = document.querySelectorAll(DOM.delCartBtn);
+    deleteItemInCartBtn !== null
+      ? Array.prototype.map.call(deleteItemInCartBtn, item =>
+          item.addEventListener("click", deleteItemInCartCtrl)
         )
       : null;
   };
@@ -476,7 +491,14 @@ const appCtrl = ((mod, UI) => {
   };
 
   const deleteItemInCartCtrl = e => {
-    console.log("Clicked");
+    const elementID = e.target.parentNode.parentNode.dataset.id;
+    console.log(elementID);
+    // Del item in model
+    mod.delCartItemInModel(parseInt(elementID));
+    // Re-render item
+    UI.renderStoredItem();
+    // Re-addEventListener to all button
+    addEventListenerToRenderElement();
   };
 
   const formartNumber = number => {
