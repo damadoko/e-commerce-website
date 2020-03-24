@@ -280,7 +280,7 @@ li {
 }
 
 #sell-page .form-row label {
-  width: 20%;
+  width: auto;
 }
 
 #form-name {
@@ -292,7 +292,7 @@ li {
 }
 
 #form-discount {
-  width: 100%;
+  width: calc(100% - 110px);
 }
 
 #form-item-description {
@@ -340,21 +340,28 @@ li {
 
 #cart-modal-total {
   background-color: var(--primary-color);
+}
+
+#cart-modal-total .cart-modal-total-pay {
+  color: var(--secondary-color);
+}
+
+#cart-modal-total .cart-modal-total-wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-#cart-modal-total-view,
-#cart-modal-total-checkout {
+.cart-modal-total-view,
+.cart-modal-total-checkout {
   background-color: #ff3d00;
   color: var(--background-color);
 }
 /* #cart-modal-total-checkout {
   border: var(--background-color);
 } */
-#cart-modal-total-view:hover,
-#cart-modal-total-checkout:hover {
+.cart-modal-total-view:hover,
+.cart-modal-total-checkout:hover {
   color: #ff3d00;
   background-color: var(--background-color);
 }
@@ -422,6 +429,9 @@ li {
 #cart-page .cart-page-item-quantity {
   width: 15%;
   text-align: center;
+  border: none;
+  background: transparent;
+  outline: none;
 }
 #cart-page .cart-page-item-total {
   width: 15%;

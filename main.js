@@ -103,6 +103,7 @@ const dataMockup = [
       "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
   }
 ];
+const USDToVND = 230000;
 
 const model = (() => {
   let data = JSON.parse(localStorage.getItem("DATA_LOCAL")) || {
@@ -132,8 +133,8 @@ const model = (() => {
       URL: item.encodedURL,
       price: { originalPrice: parseInt(item.price), dealtPrice: dealtPrice },
       formatedPrice: {
-        formatedOriginalPrice: formartNumber(parseInt(item.price)),
-        formatedDealtPrice: formartNumber(dealtPrice)
+        formatedOriginalPrice: appCtrl.formartNumber(parseInt(item.price)),
+        formatedDealtPrice: appCtrl.formartNumber(dealtPrice)
       },
       unit: parseInt(item.unit),
       sizeArr: item.sizeArr,
@@ -177,8 +178,10 @@ const model = (() => {
     // find duplicate item index
     index = compareIDArr.indexOf(true); // -1 if no duplicate
     // Insert HTML if item not added to cart before ESLE increase quantity
-    compareID > 0
+    compareID !== undefined && data.itemInCart[index].quantity < 5
       ? (data.itemInCart[index].quantity += 1)
+      : compareID !== undefined && data.itemInCart[index].quantity >= 5
+      ? alert(`Out of stock!`)
       : data.itemInCart.push(newCartItem);
     // Store item in localstorage
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
@@ -191,10 +194,21 @@ const model = (() => {
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   };
 
+  const updateItemInModel = (itemID, qty) => {
+    const updateIndex = data.itemInCart.map(item => item.ID).indexOf(itemID);
+    // console.log(updateIndex);
+    qty <= 5
+      ? (data.itemInCart[updateIndex].quantity = qty)
+      : alert("Out of stock!!!");
+    // Store data in localstorage
+    localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
+  };
+
   return {
     addNewItemToModel: addNewItemToModel,
     addNewCartItemToModel: addNewCartItemToModel,
     delCartItemInModel: delCartItemInModel,
+    updateItemInModel: updateItemInModel,
     data: data
   };
 })();
@@ -221,21 +235,26 @@ const UICtrl = (() => {
     imgBase64: "#img-view",
     badge: ".badge",
     addCartBtn: ".add-cart-btn",
-    delCartBtn: ".cart-page-item-action"
+    delCartBtn: ".cart-page-item-action",
+    itemQuantityInCart: ".cart-page-item-quantity",
+    cartModalTotalPay: ".cart-modal-total-pay"
   };
 
   const getInputItem = () => {
     const size = document.querySelector(DOMstring.formItemSize).value;
     const color = document.querySelector(DOMstring.formItemColor).value;
-
     const sizeArr = size.split(",").map(Number);
     const colorArr = color.split(",");
+    const unit = document.querySelector(DOMstring.formItemUnit).value;
+    let price = document.querySelector(DOMstring.formItemPrice).value;
+
+    unit ? (price = price * USDToVND) : null;
 
     return {
       title: document.querySelector(DOMstring.formItemName).value,
       encodedURL: document.querySelector(DOMstring.imgBase64).src,
-      price: document.querySelector(DOMstring.formItemPrice).value,
-      unit: document.querySelector(DOMstring.formItemUnit).value,
+      price: price,
+      unit: unit,
       sizeArr: sizeArr,
       colorArr: colorArr,
       discount: document.querySelector(DOMstring.formItemDiscount).value,
@@ -327,38 +346,56 @@ const UICtrl = (() => {
         (document.querySelector(
           DOMstring.badge
         ).innerHTML = itemQuantityInCart))
-      : null;
+      : (document.querySelector(DOMstring.badge).innerHTML = 0);
 
     // Render total in cart-page
     const totalCart = document.querySelector(DOMstring.cartPageTotal);
-    if (totalCart !== null) {
-      let totalPay;
-      const totalPayArr = document.querySelectorAll(
-        DOMstring.cartPageItemTotal
-      );
-      itemInCart.length !== 0
-        ? (totalPay = Array.prototype.map
-            .call(totalPayArr, item =>
-              parseInt(
-                item.innerHTML
-                  .slice(0, -1)
-                  .split(",")
-                  .join("")
-              )
-            )
-            .reduce((prev, next) => prev + next))
-        : (totalPay = 0);
+    const totalCartModal = document.querySelector(DOMstring.cartModalTotalPay);
+    let totalPay;
+    local.itemInCart.length !== 0
+      ? (totalPay = local.itemInCart
+          .map(
+            item =>
+              item.quantity *
+              item.formatedDealtPrice
+                .slice(0, -1)
+                .split(",")
+                .join("")
+          )
+          .reduce((prev, cur) => prev + cur))
+      : (totalPay = 0);
+    totalCart !== null
+      ? (totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
+          totalPay
+        )}đ`)
+      : null;
+    totalCartModal.innerHTML = `Total ${appCtrl.formartNumber(totalPay)}đ`;
+    // if (totalCart !== null) {
+    //   let totalPay;
+    //   const totalPayArr = document.querySelectorAll(
+    //     DOMstring.cartPageItemTotal
+    //   );
+    //   itemInCart.length !== 0
+    //     ? (totalPay = Array.prototype.map
+    //         .call(totalPayArr, item =>
+    //           parseInt(
+    //             item.innerHTML
+    //               .slice(0, -1)
+    //               .split(",")
+    //               .join("")
+    //           )
+    //         )
+    //         .reduce((prev, cur) => prev + cur))
+    //     : (totalPay = 0);
 
-      totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
-        totalPay
-      )}đ`;
-    }
+    //   totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
+    //     totalPay
+    //   )}đ`;
+    // }
   };
 
   const processItemHtml = item => {
-    let html, unitHtml, sizeHtml, colorHtml;
-    // Define UI unit
-    item.unit ? (unitHtml = `$`) : (unitHtml = `đ`);
+    let html, sizeHtml, colorHtml;
     // Define UI size
     sizeHtml = item.sizeArr
       .map(size => `<option value="${size}">${size}</option>`)
@@ -372,8 +409,8 @@ const UICtrl = (() => {
       .join("");
     // Define HTML block
     item.isDiscount.status
-      ? (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><span class="discount">-${item.isDiscount.percent}%</span><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}${unitHtml}</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`)
-      : (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}${unitHtml}</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`);
+      ? (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><span class="discount">-${item.isDiscount.percent}%</span><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`)
+      : (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`);
     return html;
   };
 
@@ -390,7 +427,7 @@ const UICtrl = (() => {
     total = appCtrl.formartNumber(
       parseInt(item.formatedDealtPrice.split(",").join("")) * item.quantity
     );
-    html = `<div class="cart-page-item px-4" data-id=${item.ID}><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><div class="cart-page-item-quantity">${item.quantity}</div><div class="cart-page-item-total">${total}${unit}</div><div class="d-block m-auto"><i class="fas fa-trash-alt cart-page-item-action"></i></div></div>`;
+    html = `<div class="cart-page-item px-4" data-id=${item.ID}><div class="cart-page-item-title">${item.title}, size: ${item.size}, color: ${item.color}</div><div class="cart-page-item-unit-price">${item.formatedDealtPrice}${unit}</div><input type="number" class="cart-page-item-quantity" value=${item.quantity}><div class="cart-page-item-total">${total}${unit}</div><div class="d-block m-auto"><i class="fas fa-trash-alt cart-page-item-action"></i></div></div>`;
     return html;
   };
   return {
@@ -445,6 +482,15 @@ const appCtrl = ((mod, UI) => {
           item.addEventListener("click", deleteItemInCartCtrl)
         )
       : null;
+    // Add change item quantity (cart-page)
+    const itemQuantityInCart = document.querySelectorAll(
+      DOM.itemQuantityInCart
+    );
+    itemQuantityInCart !== null
+      ? Array.prototype.map.call(itemQuantityInCart, item =>
+          item.addEventListener("change", updateCartItemQuantityCtrl)
+        )
+      : null;
   };
 
   const encodeURLCtrl = e => {
@@ -464,6 +510,7 @@ const appCtrl = ((mod, UI) => {
     e.preventDefault();
     // Store new item infomation to a variable
     const itemInfo = UI.getInputItem();
+    console.log(itemInfo);
     // Add & Store item information to model
     mod.addNewItemToModel(itemInfo);
     // console.log(newItemMockup);
@@ -491,10 +538,21 @@ const appCtrl = ((mod, UI) => {
   };
 
   const deleteItemInCartCtrl = e => {
-    const elementID = e.target.parentNode.parentNode.dataset.id;
+    const elementID = parseInt(e.target.parentNode.parentNode.dataset.id);
     console.log(elementID);
     // Del item in model
-    mod.delCartItemInModel(parseInt(elementID));
+    mod.delCartItemInModel(elementID);
+    // Re-render item
+    UI.renderStoredItem();
+    // Re-addEventListener to all button
+    addEventListenerToRenderElement();
+  };
+
+  const updateCartItemQuantityCtrl = e => {
+    const elementID = parseInt(e.target.parentNode.dataset.id);
+    const newQuantity = parseInt(e.target.value);
+    // update item in model
+    mod.updateItemInModel(elementID, newQuantity);
     // Re-render item
     UI.renderStoredItem();
     // Re-addEventListener to all button
