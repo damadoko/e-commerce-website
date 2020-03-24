@@ -103,7 +103,7 @@ const dataMockup = [
       "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
   }
 ];
-const USDToVND = 230000;
+const USDToVND = 23000;
 
 const model = (() => {
   let data = JSON.parse(localStorage.getItem("DATA_LOCAL")) || {
