@@ -496,15 +496,30 @@ const appCtrl = ((mod, UI) => {
   };
 
   const encodeURLCtrl = e => {
-    const fileSelected = e.target.files;
-    async function Main() {
-      const base64 = await UI.encodeImageToURL(fileSelected[0]);
-      return base64;
+    let fileSelected = e.target.files;
+    console.log(fileSelected[0].type);
+    const imgShow = document.querySelector(DOM.imgBase64);
+    const fileImported = document.querySelector(DOM.formItemFile);
+    if (fileSelected.length !== 0 && fileSelected[0].type === "image/jpeg") {
+      async function Main() {
+        const base64 = await UI.encodeImageToURL(fileSelected[0]);
+        return base64;
+      }
+      Main().then(res => {
+        imgShow.src = res;
+        imgShow.classList.add("show");
+        imgShow.classList.remove("hide");
+      });
+    } else if (
+      fileSelected.length !== 0 &&
+      fileSelected[0].type !== "image/jpeg"
+    ) {
+      alert("Please import images type JPG/JPEG");
+      fileImported.value = "";
+    } else {
+      imgShow.classList.add("hide");
+      imgShow.classList.remove("show");
     }
-    Main().then(res => {
-      const imgShow = document.querySelector(DOM.imgBase64);
-      imgShow.src = res;
-    });
   };
 
   const AddItemCtrl = e => {

@@ -59,7 +59,11 @@ li {
 }
 
 .show {
-  opacity: 1;
+  opacity: 1 !important;
+}
+
+.hide {
+  opacity: 0 !important;
 }
 
 .sell-page-bg {
@@ -383,6 +387,8 @@ li {
 
 #sell-page #img-view {
   opacity: 0;
+  width: 100px;
+  height: 100px;
 }
 
 .cart-page-item {
