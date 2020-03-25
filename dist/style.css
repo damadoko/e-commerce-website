@@ -17,6 +17,7 @@ body {
   font-family: "century", sans-serif;
   box-sizing: border-box;
   background-color: var(--background-color);
+  height: 100%;
 }
 
 a {
@@ -31,11 +32,6 @@ li {
   text-decoration: line-through;
 }
 
-.shoes-icon {
-  height: 50px;
-  width: 70px;
-}
-
 .title-break {
   height: 2px;
   width: 300px;
@@ -45,6 +41,11 @@ li {
 
 .shopping-cart {
   position: relative;
+}
+
+.shoes-icon {
+  height: 50px;
+  width: 70px;
 }
 
 .shopping-cart .badge {
@@ -114,7 +115,7 @@ li {
 }
 
 #home-carousel .carousel-inner .carousel-item img {
-  height: 100vh;
+  height: 60vh;
 }
 
 #home-contact .col-md-4 {
@@ -152,7 +153,13 @@ li {
   color: var(--primary-color);
 }
 
+.wrapper {
+  min-height: calc(100vh - 70px);
+}
+
 #home-footer {
+  height: 70px;
+  width: 100%;
   background-color: var(--primary-color);
 }
 
@@ -167,7 +174,7 @@ li {
 }
 
 #home-carousel .carousel-inner .carousel-caption {
-  bottom: 30vh;
+  bottom: 20vh;
 }
 
 #home-product > h1 {
@@ -271,8 +278,18 @@ li {
 #sell-page {
   width: 100vw;
   min-height: 600px;
+}
+
+.sell-page-bg {
   background: url(images/form_showcase.jpg) center bottom/cover;
-  background-position-y: bottom;
+  /* background-position-y: bottom; */
+}
+
+#sell-page input,
+#sell-page select,
+#sell-page textarea {
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px 0px var(--text-color);
 }
 
 #sell-page .form-row {
@@ -280,15 +297,20 @@ li {
 }
 
 #sell-page .form-row label {
-  width: auto;
+  display: inline-block;
 }
 
 #form-name {
-  width: 80%;
+  width: auto;
 }
 
 #form-file {
-  width: 80%;
+  width: auto;
+}
+
+#form-price {
+  width: auto;
+  /* width: calc(100% - 110px); */
 }
 
 #form-discount {
@@ -367,8 +389,9 @@ li {
 }
 
 #cart-page {
-  height: 100vh;
+  min-height: 100%;
   overflow: auto;
+  padding-bottom: -70px;
   /* background: url("images/shipping_cart_bg.jpg") center center/cover; */
 }
 
@@ -463,3 +486,12 @@ li {
     border: none;
   }
 }
+
+/* @media only screens and (min-height: 100vh) {
+  #home-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 70px;
+  }
+} */

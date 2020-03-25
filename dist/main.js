@@ -217,8 +217,8 @@ const UICtrl = (() => {
   // Get DOM string
   const DOMstring = {
     cartModalIcon: ".shopping-cart",
-    cartModal: "#cart-modal",
-    cartModalWraper: "#cart-modal-wrapper",
+    cartModal: ".cart-modal",
+    cartModalWraper: ".cart-modal-wrapper",
     formItemName: "#form-name",
     formItemFile: "#form-file",
     formItemPrice: "#form-price",
@@ -409,8 +409,8 @@ const UICtrl = (() => {
       .join("");
     // Define HTML block
     item.isDiscount.status
-      ? (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><span class="discount">-${item.isDiscount.percent}%</span><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`)
-      : (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><img class="card-img-top" src=${item.URL}><div class="card-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><spand class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</spand><spand class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</spand></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`);
+      ? (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><div class="card-img"><img class="card-img-top" src=${item.URL}><div class="card-img-description p-4"><p>${item.description}</p></div></div><span class="discount">-${item.isDiscount.percent}%</span><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex flex-column align-items-center"><div class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</div><div class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</div></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`)
+      : (html = `<div class="card col-sm-6 col-md-4 col-lg-3 p-4" data-id=${item.ID}><div class="card-img"><img class="card-img-top" src=${item.URL}></div><div class="card-img-description p-4"><p>${item.description}</p></div><div class="card-body m-auto overflow-auto"><h5 class="card-title">${item.title}</h5><div class="card-price mb-2 d-flex justify-content-between"><div class="card-orginal-price text-muted">${item.formatedPrice.formatedOriginalPrice}đ</div><div class="card-deal-price">${item.formatedPrice.formatedDealtPrice}đ</div></div><div class="card-size mb-2 d-flex justify-content-between"><label>Size</label><select class="select-size">${sizeHtml}</select></div><div class="card-color mb-2 d-flex justify-content-between"><label>Color</label><select class="select-size">${colorHtml}</select></div><div class="card-add"><button class="add-cart-btn btn d-block mx-auto btn-dark">Add to cart</button></div></div></div>`);
     return html;
   };
 
