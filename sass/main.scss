@@ -1,12 +1,12 @@
 // font
 @font-face {
   font-family: century;
-  src: url("/dist/century-gothic-font/CenturyGothic.ttf");
-  src: url("/dist/century-gothic-font/GOTHIC.TTF");
-  src: url("/dist/century-gothic-font/GOTHICB.TTF");
-  src: url("/dist/century-gothic-font/GOTHICB0.TTF");
-  src: url("/dist/century-gothic-font/GOTHICBI.TTF");
-  src: url("/dist/century-gothic-font/GOTHICI.TTF");
+  src: url("../dist/century-gothic-font/CenturyGothic.ttf");
+  src: url("../dist/century-gothic-font/GOTHIC.TTF");
+  src: url("../dist/century-gothic-font/GOTHICB.TTF");
+  src: url("../dist/century-gothic-font/GOTHICB0.TTF");
+  src: url("../dist/century-gothic-font/GOTHICBI.TTF");
+  src: url("../dist/century-gothic-font/GOTHICI.TTF");
   font-weight: normal;
   font-style: normal;
 }
@@ -75,7 +75,7 @@ li {
 }
 
 .sell-page-bg {
-  background: url("/dist/images/form_showcase.jpg") center bottom/cover;
+  background: url("../dist/images/form_showcase.jpg") center bottom/cover;
 }
 // Navbar and Footer
 #main {
@@ -303,7 +303,7 @@ li {
           text-align: justify;
           padding-top: 1rem;
           color: #ffffff;
-          opacity: 0.5;
+          opacity: 0;
           transition: all 0.5s ease-in-out;
           z-index: 100;
 
@@ -317,7 +317,7 @@ li {
             height: 100%;
           }
 
-          .card-iewdescription {
+          .card-img-description {
             opacity: 1;
           }
         }

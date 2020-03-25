@@ -281,7 +281,7 @@ li {
 }
 
 .sell-page-bg {
-  background: url(images/form_showcase.jpg) center bottom/cover;
+  background: url("/dist/images/form_showcase.jpg") center bottom/cover;
   /* background-position-y: bottom; */
 }
 

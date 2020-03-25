@@ -305,6 +305,8 @@ const UICtrl = (() => {
     document.querySelector(DOMstring.formItemColor).value = "";
     document.querySelector(DOMstring.formItemDiscount).value = "";
     document.querySelector(DOMstring.formItemDes).value = "";
+    document.querySelector(DOMstring.imgBase64).classList.remove("show");
+    document.querySelector(DOMstring.imgBase64).classList.add("hide");
   };
 
   const renderStoredItem = () => {
@@ -370,28 +372,6 @@ const UICtrl = (() => {
         )}đ`)
       : null;
     totalCartModal.innerHTML = `Total ${appCtrl.formartNumber(totalPay)}đ`;
-    // if (totalCart !== null) {
-    //   let totalPay;
-    //   const totalPayArr = document.querySelectorAll(
-    //     DOMstring.cartPageItemTotal
-    //   );
-    //   itemInCart.length !== 0
-    //     ? (totalPay = Array.prototype.map
-    //         .call(totalPayArr, item =>
-    //           parseInt(
-    //             item.innerHTML
-    //               .slice(0, -1)
-    //               .split(",")
-    //               .join("")
-    //           )
-    //         )
-    //         .reduce((prev, cur) => prev + cur))
-    //     : (totalPay = 0);
-
-    //   totalCart.innerHTML = `Total ${itemQuantityInCart} items: ${appCtrl.formartNumber(
-    //     totalPay
-    //   )}đ`;
-    // }
   };
 
   const processItemHtml = item => {
@@ -447,7 +427,7 @@ const appCtrl = ((mod, UI) => {
     // Add modal event
     document.querySelector(DOM.cartModalIcon).addEventListener("click", () => {
       document.querySelector(DOM.cartModal).classList.toggle("showModal");
-      console.log("click");
+      // console.log("click");
     });
 
     // Encode imgURL event
@@ -497,7 +477,6 @@ const appCtrl = ((mod, UI) => {
 
   const encodeURLCtrl = e => {
     let fileSelected = e.target.files;
-    console.log(fileSelected[0].type);
     const imgShow = document.querySelector(DOM.imgBase64);
     const fileImported = document.querySelector(DOM.formItemFile);
     if (fileSelected.length !== 0 && fileSelected[0].type === "image/jpeg") {
@@ -527,14 +506,16 @@ const appCtrl = ((mod, UI) => {
     e.preventDefault();
     // Store new item infomation to a variable
     const itemInfo = UI.getInputItem();
-    console.log(itemInfo);
-    // Add & Store item information to model
-    mod.addNewItemToModel(itemInfo);
-    // console.log(newItemMockup);
-    // Render stored Item
-    UI.renderStoredItem();
-    // Clear input field
-    UI.clearInputField();
+    const validateResult = inputValidator(itemInfo);
+    validateResult
+      ? // Add & Store item information to model
+        (mod.addNewItemToModel(itemInfo),
+        // console.log(newItemMockup);
+        // Render stored Item
+        UI.renderStoredItem(),
+        // Clear input field
+        UI.clearInputField())
+      : UI.clearInputField;
   };
 
   const addItemToCartCtrl = e => {
@@ -599,6 +580,28 @@ const appCtrl = ((mod, UI) => {
     }
 
     return `${intenger}.${decimal}`;
+  };
+
+  const inputValidator = input => {
+    const validation =
+      input.title === ""
+        ? alert("Invalid input, please add item title!!!")
+        : isNaN(input.price) || input.price <= 0
+        ? alert("Invalid price, please add positive price!!!")
+        : input.sizeArr
+            .map(item => 36 <= item <= 45 && !isNaN(item))
+            .find(res => res === false) !== undefined
+        ? // || input.sizeArr.map(item => isNaN(item)).find(res => res === true) !==
+          //   undefined
+          alert("Invalid size, please add item size from 36 to 45!!!")
+        : input.colorArr
+            .map(item => item === "" || !isNaN(item))
+            .find(res => res === true) !== undefined
+        ? alert("Invalid color, please fill item color with character!!!")
+        : input.encodedURL.includes("form.html")
+        ? alert("You have not import item images yet!!!")
+        : true;
+    return validation;
   };
 
   return {
