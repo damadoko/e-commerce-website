@@ -245,7 +245,7 @@ const UICtrl = (() => {
     const color = document.querySelector(DOMstring.formItemColor).value;
     const sizeArr = size.split(",").map(Number);
     const colorArr = color.split(",");
-    const unit = document.querySelector(DOMstring.formItemUnit).value;
+    const unit = parseInt(document.querySelector(DOMstring.formItemUnit).value);
     let price = document.querySelector(DOMstring.formItemPrice).value;
 
     unit ? (price = price * USDToVND) : null;
@@ -471,23 +471,25 @@ const appCtrl = ((mod, UI) => {
     // Add AddToCart event (home-page)
     const addToCartBtnNodeList = document.querySelectorAll(DOM.addCartBtn);
     addToCartBtnNodeList !== null
-      ? Array.prototype.map.call(addToCartBtnNodeList, item =>
+      ? Array.from(addToCartBtnNodeList).map(item =>
           item.addEventListener("click", addItemToCartCtrl)
         )
       : null;
+
     // Add delete item (cart-page)
     const deleteItemInCartBtn = document.querySelectorAll(DOM.delCartBtn);
     deleteItemInCartBtn !== null
-      ? Array.prototype.map.call(deleteItemInCartBtn, item =>
+      ? Array.from(deleteItemInCartBtn).map(item =>
           item.addEventListener("click", deleteItemInCartCtrl)
         )
       : null;
+
     // Add change item quantity (cart-page)
     const itemQuantityInCart = document.querySelectorAll(
       DOM.itemQuantityInCart
     );
     itemQuantityInCart !== null
-      ? Array.prototype.map.call(itemQuantityInCart, item =>
+      ? Array.from(itemQuantityInCart).map(item =>
           item.addEventListener("change", updateCartItemQuantityCtrl)
         )
       : null;
