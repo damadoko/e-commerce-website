@@ -66,6 +66,13 @@ li {
   z-index: 99 !important;
 }
 
+.show {
+  opacity: 1;
+}
+
+.sell-page-bg {
+  background: url("/dist/images/form_showcase.jpg") center bottom/cover;
+}
 // Navbar and Footer
 #main {
   &-navbar {
@@ -306,7 +313,7 @@ li {
             height: 100%;
           }
 
-          .card-img-description {
+          .card-iewdescription {
             opacity: 1;
           }
         }
@@ -367,7 +374,7 @@ li {
   }
 
   .form-row {
-    width: 60%;
+    width: 70%;
 
     label {
       display: inline-block;
@@ -376,16 +383,21 @@ li {
 
   #form {
     &-name,
-    &-file,
     &-price,
     &-discount {
       width: auto;
     }
-
+    &-file {
+      width: 50%;
+    }
     &-item-description {
       width: 100%;
       padding: 1rem;
     }
+  }
+
+  #img-view {
+    opacity: 0;
   }
 }
 

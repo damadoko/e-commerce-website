@@ -58,6 +58,14 @@ li {
   z-index: 99 !important;
 }
 
+.show {
+  opacity: 1;
+}
+
+.sell-page-bg {
+  background: url("/dist/images/form_showcase.jpg") center bottom/cover;
+}
+
 #main-navbar {
   z-index: 99;
   background-color: #e5e5e5;
@@ -297,7 +305,7 @@ li {
   height: 100%;
 }
 
-#home-product .card-img:hover .card-img-description {
+#home-product .card-img:hover .card-iewdescription {
   opacity: 1;
 }
 
@@ -353,20 +361,28 @@ li {
 }
 
 #sell-page .form-row {
-  width: 60%;
+  width: 70%;
 }
 
 #sell-page .form-row label {
   display: inline-block;
 }
 
-#sell-page #form-name, #sell-page #form-file, #sell-page #form-price, #sell-page #form-discount {
+#sell-page #form-name, #sell-page #form-price, #sell-page #form-discount {
   width: auto;
+}
+
+#sell-page #form-file {
+  width: 50%;
 }
 
 #sell-page #form-item-description {
   width: 100%;
   padding: 1rem;
+}
+
+#sell-page #img-view {
+  opacity: 0;
 }
 
 .cart-page-item {

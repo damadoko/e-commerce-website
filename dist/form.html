@@ -100,8 +100,8 @@
           Please fill your shoes's information
         </h1>
         <div class="title-break mb-4"></div>
-        <form class="form-row w-60 m-auto">
-          <div class="col-xl-6 mb-4 ">
+        <form class="form-row m-auto">
+          <div class="col-md-6 mb-4 ">
             <label>Shoes's Name:</label>
             <input
               type="text"
@@ -109,14 +109,20 @@
               placeholder="Ex: [Adidas] Ultra boost 5.0"
             />
           </div>
-          <div class="col-xl-6 mb-4 ">
+          <div class="col-md-6 mb-4">
+            <label>Discount(%):</label>
+            <input id="form-discount" type="number" min="0" max="99" />
+          </div>
+          <div class="col-lg-6 mb-4 ">
             <label>Images:</label>
             <input
               type="file"
               id="form-file"
               class="form-control-file d-inline-block"
             />
-            <div style="max-width: 120px; opacity: 0;">
+          </div>
+          <div class="col-lg-6 mb-4 ">
+            <div style="max-width: 120px">
               <img style="width: 100%;" id="img-view" src="" alt="img-view" />
             </div>
           </div>
@@ -136,11 +142,11 @@
               <option value="1">USD</option>
             </select>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-6 mb-4">
             <label>Size:</label>
             <input type="text" id="form-size" placeholder="Ex: 36,37,42" />
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-6 mb-4">
             <label>Color:</label>
             <input
               type="text"
@@ -148,10 +154,7 @@
               placeholder="Ex: Red, Blue"
             />
           </div>
-          <div class="col-md-4 mb-4">
-            <label>Discount(%):</label>
-            <input id="form-discount" type="number" min="0" max="99" />
-          </div>
+
           <div class="col-md-12 mb-4">
             <textarea
               id="form-item-description"
