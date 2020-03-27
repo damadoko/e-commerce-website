@@ -634,7 +634,7 @@ const appCtrl = ((mod, UI) => {
         (img.dataset.valid = false),
         (img.style.opacity = 1))
       : (img.style.opacity = 0),
-      (img.dataset.valid = false);
+      (img.dataset.valid = true);
     // const validation =
     //   input.title === ""
     //     ? alert("Invalid input, please add item title!!!")
@@ -658,8 +658,8 @@ const appCtrl = ((mod, UI) => {
     const validation =
       Array.from(contentValidate)
         .map(item => item.dataset.valid)
-        .find(res => res === false) !== undefined;
-
+        .find(res => res === false) === undefined;
+    console.log(validation);
     return validation;
   };
 
