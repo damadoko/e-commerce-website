@@ -243,6 +243,7 @@ const UICtrl = (() => {
     priceValidate: ".validate-price",
     sizeValidate: ".validate-size",
     colorValidate: ".validate-color",
+    discountValidate: ".validate-discount",
     contentValidate: ".validate-content"
   };
 
@@ -521,7 +522,7 @@ const appCtrl = ((mod, UI) => {
         UI.renderStoredItem(),
         // Clear input field
         UI.clearInputField())
-      : UI.clearInputField;
+      : UI.clearInputField();
   };
 
   const addItemToCartCtrl = e => {
@@ -594,47 +595,54 @@ const appCtrl = ((mod, UI) => {
     const size = document.querySelector(DOM.sizeValidate);
     const color = document.querySelector(DOM.colorValidate);
     const img = document.querySelector(DOM.imgValidate);
+    const discount = document.querySelector(DOM.discountValidate);
 
     input.title === ""
       ? ((title.innerHTML = "Invalid input, please add item title!!!"),
-        (title.dataset.valid = false),
+        (title.dataset.valid = 0),
         (title.style.opacity = 1))
-      : (title.style.opacity = 0),
-      (title.dataset.valid = true);
+      : ((title.style.opacity = 0), (title.dataset.valid = 1));
 
     isNaN(input.price) || input.price <= 0
       ? ((price.innerHTML = "Invalid price, please add positive price!!!"),
-        (price.dataset.valid = false),
+        (price.dataset.valid = 0),
         (price.style.opacity = 1))
-      : (price.style.opacity = 0),
-      (price.dataset.valid = true);
+      : ((price.style.opacity = 0), (price.dataset.valid = 1));
 
     input.sizeArr
-      .map(item => 36 <= item <= 45 && !isNaN(item))
+      .map(item => 36 <= item && item <= 45 && !isNaN(item))
       .find(res => res === false) !== undefined
       ? ((size.innerHTML =
           "Invalid size, please add item size from 36 to 45!!!"),
-        (size.dataset.valid = false),
-        (size.style.opacity = 1))
-      : (size.style.opacity = 0),
-      (size.dataset.valid = true);
+        (size.style.opacity = 1),
+        (size.dataset.valid = 0))
+      : ((size.style.opacity = 0), (size.dataset.valid = 1));
 
     input.colorArr
       .map(item => item === "" || !isNaN(item))
       .find(res => res === true) !== undefined
       ? ((color.innerHTML =
           "Invalid color, please fill item color with character!!!"),
-        (color.dataset.valid = false),
+        (color.dataset.valid = 0),
         (color.style.opacity = 1))
-      : (color.style.opacity = 0),
-      (color.dataset.valid = true);
+      : ((color.style.opacity = 0), (color.dataset.valid = 1));
 
     input.encodedURL.includes("form.html")
       ? ((img.innerHTML = "You have not import item images yet!!!"),
-        (img.dataset.valid = false),
+        (img.dataset.valid = 0),
         (img.style.opacity = 1))
-      : (img.style.opacity = 0),
-      (img.dataset.valid = true);
+      : ((img.style.opacity = 0), (img.dataset.valid = 1));
+
+    if (input.discount !== "") {
+      parseInt(input.discount) <= 0 || parseInt(input.discount) >= 100
+        ? ((discount.innerHTML = "Must be from 0% to 100%"),
+          (discount.dataset.valid = 0),
+          (discount.style.opacity = 1))
+        : ((discount.style.opacity = 0), (discount.dataset.valid = 1));
+    } else {
+      discount.dataset.valid = 1;
+    }
+
     // const validation =
     //   input.title === ""
     //     ? alert("Invalid input, please add item title!!!")
@@ -658,8 +666,7 @@ const appCtrl = ((mod, UI) => {
     const validation =
       Array.from(contentValidate)
         .map(item => item.dataset.valid)
-        .find(res => res === false) === undefined;
-    console.log(validation);
+        .find(res => res === "0") === undefined;
     return validation;
   };
 
