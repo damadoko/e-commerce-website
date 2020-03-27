@@ -391,6 +391,19 @@ li {
   height: 100px;
 }
 
+#sell-page .validate {
+  display: -ms-inline-grid;
+  display: inline-grid;
+}
+
+#sell-page .validate-content {
+  padding-top: 4px;
+  margin: 0;
+  font-size: 12px;
+  color: #ff3d00;
+  opacity: 0;
+}
+
 .cart-page-item {
   display: -webkit-box;
   display: -ms-flexbox;
