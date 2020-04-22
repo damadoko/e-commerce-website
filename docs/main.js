@@ -9,13 +9,13 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
   },
   {
     ID: 1,
@@ -26,13 +26,13 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
   },
   {
     ID: 2,
@@ -43,13 +43,13 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
   },
   {
     ID: 3,
@@ -60,13 +60,13 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
   },
   {
     ID: 4,
@@ -77,13 +77,13 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
   },
   {
     ID: 5,
@@ -94,26 +94,26 @@ const dataMockup = [
     price: { originalPrice: 4500000, dealtPrice: 2250000 },
     formatedPrice: {
       formatedOriginalPrice: "4,500,000.00",
-      formatedDealtPrice: "2,225,000.00"
+      formatedDealtPrice: "2,225,000.00",
     },
     unit: 0,
     sizeArr: [36, 37, 38, 40],
     colorArr: ["All White", "All Black", "Silver Medal"],
     description:
-      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole"
-  }
+      "The adidas Ultra Boost 5.0 aka the Ultra Boost 2019 is a brand new running shoe from adidas set to release in February. It is a complete redesign from the original Ultra Boost models, but features a similar package of Boost cushioning, Primeknit uppers, and a Continental rubber outsole",
+  },
 ];
 const USDToVND = 23000;
 
 const model = (() => {
   let data = JSON.parse(localStorage.getItem("DATA_LOCAL")) || {
     itemInWeb: dataMockup,
-    itemInCart: []
+    itemInCart: [],
   };
   localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   console.log("data", data);
 
-  const addNewItemToModel = item => {
+  const addNewItemToModel = (item) => {
     let newItem, newID, discountObj;
     // New ID = previous ID + 1
     data.itemInWeb.length > 0
@@ -134,12 +134,12 @@ const model = (() => {
       price: { originalPrice: parseInt(item.price), dealtPrice: dealtPrice },
       formatedPrice: {
         formatedOriginalPrice: appCtrl.formartNumber(parseInt(item.price)),
-        formatedDealtPrice: appCtrl.formartNumber(dealtPrice)
+        formatedDealtPrice: appCtrl.formartNumber(dealtPrice),
       },
       unit: parseInt(item.unit),
       sizeArr: item.sizeArr,
       colorArr: item.colorArr,
-      description: item.description
+      description: item.description,
     };
     // Store item in model and localstorage
     data.itemInWeb.push(newItem);
@@ -148,7 +148,7 @@ const model = (() => {
     return newItem;
   };
 
-  const addNewCartItemToModel = itemInfo => {
+  const addNewCartItemToModel = (itemInfo) => {
     let newCartItem, newID, index;
     // Get local stored info
     data.itemInCart.length > 0
@@ -164,17 +164,17 @@ const model = (() => {
       color: itemInfo.color,
       unit: itemInfo.unit,
       quantity: 1,
-      webItemID: parseInt(itemInfo.webItemID)
+      webItemID: parseInt(itemInfo.webItemID),
     };
     // Get current webItemID and Compare addItemID with all webItemID
     const compareIDArr = data.itemInCart.map(
-      item =>
+      (item) =>
         item.webItemID === newCartItem.webItemID &&
         item.size === newCartItem.size &&
         item.color === newCartItem.color
     );
 
-    const compareID = compareIDArr.find(res => res === true);
+    const compareID = compareIDArr.find((res) => res === true);
     // find duplicate item index
     index = compareIDArr.indexOf(true); // -1 if no duplicate
     // Insert HTML if item not added to cart before ESLE increase quantity
@@ -187,15 +187,15 @@ const model = (() => {
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   };
 
-  const delCartItemInModel = itemID => {
-    const delIndex = data.itemInCart.map(item => item.ID).indexOf(itemID);
+  const delCartItemInModel = (itemID) => {
+    const delIndex = data.itemInCart.map((item) => item.ID).indexOf(itemID);
     data.itemInCart.splice(delIndex, 1);
     // Store data in localstorage
     localStorage.setItem("DATA_LOCAL", JSON.stringify(data));
   };
 
   const updateItemInModel = (itemID, qty) => {
-    const updateIndex = data.itemInCart.map(item => item.ID).indexOf(itemID);
+    const updateIndex = data.itemInCart.map((item) => item.ID).indexOf(itemID);
     // console.log(updateIndex);
     qty <= 5
       ? (data.itemInCart[updateIndex].quantity = qty)
@@ -209,7 +209,7 @@ const model = (() => {
     addNewCartItemToModel: addNewCartItemToModel,
     delCartItemInModel: delCartItemInModel,
     updateItemInModel: updateItemInModel,
-    data: data
+    data: data,
   };
 })();
 
@@ -244,7 +244,7 @@ const UICtrl = (() => {
     sizeValidate: ".validate-size",
     colorValidate: ".validate-color",
     discountValidate: ".validate-discount",
-    contentValidate: ".validate-content"
+    contentValidate: ".validate-content",
   };
 
   const getInputItem = () => {
@@ -265,11 +265,11 @@ const UICtrl = (() => {
       sizeArr: sizeArr,
       colorArr: colorArr,
       discount: document.querySelector(DOMstring.formItemDiscount).value,
-      description: document.querySelector(DOMstring.formItemDes).value
+      description: document.querySelector(DOMstring.formItemDes).value,
     };
   };
 
-  const getInputAddedToCart = element => {
+  const getInputAddedToCart = (element) => {
     const elementTitle = element.children[3].children[0].innerHTML;
     const formatedDealtPrice = element.children[3].children[1].children[1].innerHTML.slice(
       0,
@@ -290,11 +290,11 @@ const UICtrl = (() => {
       color: elementColor,
       URL: elementURL,
       webItemID: webItemID,
-      unit: elementUnit
+      unit: elementUnit,
     };
   };
 
-  const encodeImageToURL = file =>
+  const encodeImageToURL = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -325,15 +325,15 @@ const UICtrl = (() => {
     let itemQuantityInCart = 0;
 
     const itemHtmlBlock = local.itemInWeb
-      .map(item => processItemHtml(item))
+      .map((item) => processItemHtml(item))
       .join("");
 
     local.itemInCart.length > 0
       ? ((itemHtmlModalBlock = local.itemInCart
-          .map(item => processItemHtmlModal(item))
+          .map((item) => processItemHtmlModal(item))
           .join("")),
         (itemHtmlCartBlock = local.itemInCart
-          .map(item => processItemHtmlCart(item))
+          .map((item) => processItemHtmlCart(item))
           .join("")))
       : null;
 
@@ -350,7 +350,7 @@ const UICtrl = (() => {
     const itemInCart = local.itemInCart;
     itemInCart.length !== 0
       ? ((itemQuantityInCart = itemInCart
-          .map(item => item.quantity)
+          .map((item) => item.quantity)
           .reduce((prev, next) => prev + next)),
         (document.querySelector(
           DOMstring.badge
@@ -364,12 +364,9 @@ const UICtrl = (() => {
     local.itemInCart.length !== 0
       ? (totalPay = local.itemInCart
           .map(
-            item =>
+            (item) =>
               item.quantity *
-              item.formatedDealtPrice
-                .slice(0, -1)
-                .split(",")
-                .join("")
+              item.formatedDealtPrice.slice(0, -1).split(",").join("")
           )
           .reduce((prev, cur) => prev + cur))
       : (totalPay = 0);
@@ -381,16 +378,16 @@ const UICtrl = (() => {
     totalCartModal.innerHTML = `Total ${appCtrl.formartNumber(totalPay)}đ`;
   };
 
-  const processItemHtml = item => {
+  const processItemHtml = (item) => {
     let html, sizeHtml, colorHtml;
     // Define UI size
     sizeHtml = item.sizeArr
-      .map(size => `<option value="${size}">${size}</option>`)
+      .map((size) => `<option value="${size}">${size}</option>`)
       .join("");
     // Define UI color
     colorHtml = item.colorArr
       .map(
-        color =>
+        (color) =>
           `<option class="text-uppercase" value="${color}">${color}</option>`
       )
       .join("");
@@ -401,14 +398,14 @@ const UICtrl = (() => {
     return html;
   };
 
-  const processItemHtmlModal = item => {
+  const processItemHtmlModal = (item) => {
     let html, unitHtml;
     item.unit ? (unitHtml = `$`) : (unitHtml = `đ`);
     html = `<div class="cart-modal-item p-2 d-flex"><img src=${item.URL} /><div class="cart-modal-item-info"><p class="font-weight-bold m-0">${item.title}</p><small>Quantity: ${item.quantity}</small>  <small>Unit price: ${item.formatedDealtPrice}${unitHtml}</small></div></div>`;
     return html;
   };
 
-  const processItemHtmlCart = item => {
+  const processItemHtmlCart = (item) => {
     let html, total, unit;
     item.unit ? (unit = "$") : (unit = "đ");
     total = appCtrl.formartNumber(
@@ -423,7 +420,7 @@ const UICtrl = (() => {
     encodeImageToURL: encodeImageToURL,
     renderStoredItem: renderStoredItem,
     clearInputField: clearInputField,
-    getInputAddedToCart: getInputAddedToCart
+    getInputAddedToCart: getInputAddedToCart,
   };
 })();
 
@@ -458,7 +455,7 @@ const appCtrl = ((mod, UI) => {
     // Add AddToCart event (home-page)
     const addToCartBtnNodeList = document.querySelectorAll(DOM.addCartBtn);
     addToCartBtnNodeList !== null
-      ? Array.from(addToCartBtnNodeList).map(item =>
+      ? Array.from(addToCartBtnNodeList).map((item) =>
           item.addEventListener("click", addItemToCartCtrl)
         )
       : null;
@@ -466,7 +463,7 @@ const appCtrl = ((mod, UI) => {
     // Add delete item (cart-page)
     const deleteItemInCartBtn = document.querySelectorAll(DOM.delCartBtn);
     deleteItemInCartBtn !== null
-      ? Array.from(deleteItemInCartBtn).map(item =>
+      ? Array.from(deleteItemInCartBtn).map((item) =>
           item.addEventListener("click", deleteItemInCartCtrl)
         )
       : null;
@@ -476,13 +473,13 @@ const appCtrl = ((mod, UI) => {
       DOM.itemQuantityInCart
     );
     itemQuantityInCart !== null
-      ? Array.from(itemQuantityInCart).map(item =>
+      ? Array.from(itemQuantityInCart).map((item) =>
           item.addEventListener("change", updateCartItemQuantityCtrl)
         )
       : null;
   };
 
-  const encodeURLCtrl = e => {
+  const encodeURLCtrl = (e) => {
     let fileSelected = e.target.files;
     const imgShow = document.querySelector(DOM.imgBase64);
     const fileImported = document.querySelector(DOM.formItemFile);
@@ -491,7 +488,7 @@ const appCtrl = ((mod, UI) => {
         const base64 = await UI.encodeImageToURL(fileSelected[0]);
         return base64;
       }
-      Main().then(res => {
+      Main().then((res) => {
         imgShow.src = res;
         imgShow.classList.add("show");
         imgShow.classList.remove("hide");
@@ -508,7 +505,7 @@ const appCtrl = ((mod, UI) => {
     }
   };
 
-  const AddItemCtrl = e => {
+  const AddItemCtrl = (e) => {
     // Prevent submit
     e.preventDefault();
     // Store new item infomation to a variable
@@ -525,7 +522,7 @@ const appCtrl = ((mod, UI) => {
       : UI.clearInputField();
   };
 
-  const addItemToCartCtrl = e => {
+  const addItemToCartCtrl = (e) => {
     // Prevent submit
     e.preventDefault();
     // Get added item element
@@ -542,7 +539,7 @@ const appCtrl = ((mod, UI) => {
     addEventListenerToRenderElement();
   };
 
-  const deleteItemInCartCtrl = e => {
+  const deleteItemInCartCtrl = (e) => {
     const elementID = parseInt(e.target.parentNode.parentNode.dataset.id);
     console.log(elementID);
     // Del item in model
@@ -553,7 +550,7 @@ const appCtrl = ((mod, UI) => {
     addEventListenerToRenderElement();
   };
 
-  const updateCartItemQuantityCtrl = e => {
+  const updateCartItemQuantityCtrl = (e) => {
     const elementID = parseInt(e.target.parentNode.dataset.id);
     const newQuantity = parseInt(e.target.value);
     // update item in model
@@ -564,7 +561,7 @@ const appCtrl = ((mod, UI) => {
     addEventListenerToRenderElement();
   };
 
-  const formartNumber = number => {
+  const formartNumber = (number) => {
     // 1234.5678 -> 1,234.56
     // 1234 -> 1,234.00
 
@@ -589,7 +586,7 @@ const appCtrl = ((mod, UI) => {
     return `${intenger}.${decimal}`;
   };
 
-  const inputValidator = input => {
+  const inputValidator = (input) => {
     const title = document.querySelector(DOM.titleValidate);
     const price = document.querySelector(DOM.priceValidate);
     const size = document.querySelector(DOM.sizeValidate);
@@ -610,8 +607,8 @@ const appCtrl = ((mod, UI) => {
       : ((price.style.opacity = 0), (price.dataset.valid = 1));
 
     input.sizeArr
-      .map(item => 36 <= item && item <= 45 && !isNaN(item))
-      .find(res => res === false) !== undefined
+      .map((item) => 36 <= item && item <= 45 && !isNaN(item))
+      .find((res) => res === false) !== undefined
       ? ((size.innerHTML =
           "Invalid size, please add item size from 36 to 45!!!"),
         (size.style.opacity = 1),
@@ -619,8 +616,8 @@ const appCtrl = ((mod, UI) => {
       : ((size.style.opacity = 0), (size.dataset.valid = 1));
 
     input.colorArr
-      .map(item => item === "" || !isNaN(item))
-      .find(res => res === true) !== undefined
+      .map((item) => item === "" || !isNaN(item))
+      .find((res) => res === true) !== undefined
       ? ((color.innerHTML =
           "Invalid color, please fill item color with character!!!"),
         (color.dataset.valid = 0),
@@ -665,8 +662,8 @@ const appCtrl = ((mod, UI) => {
     const contentValidate = document.querySelectorAll(DOM.contentValidate);
     const validation =
       Array.from(contentValidate)
-        .map(item => item.dataset.valid)
-        .find(res => res === "0") === undefined;
+        .map((item) => item.dataset.valid)
+        .find((res) => res === "0") === undefined;
     return validation;
   };
 
@@ -676,7 +673,7 @@ const appCtrl = ((mod, UI) => {
       UI.renderStoredItem();
       addEventListenerCtrl();
     },
-    formartNumber: formartNumber
+    formartNumber: formartNumber,
   };
 })(model, UICtrl);
 
